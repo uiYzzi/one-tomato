@@ -1,8 +1,6 @@
 #include "widget.h"
 #include "ui_widget.h"
-#include <ctime>
-#include <sstream>
-#include <string>
+
 
 using namespace std;
 

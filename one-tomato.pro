@@ -38,5 +38,4 @@ CONFIG += c++11
 FORMS += \
     widget.ui
 
-RESOURCES += \
-    resources/icons.qrc
+RESOURCES +=
