@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
      a.setAttribute(Qt::AA_UseHighDpiPixmaps);
      a.loadTranslator();
      a.setOrganizationName("deepin");
-     a.setApplicationVersion(DApplication::buildVersion("1.0"));
+     a.setApplicationVersion(DApplication::buildVersion("1.0.3"));
      a.setApplicationAcknowledgementPage("https://blog.yzzi.top");
      a.setProductIcon(QIcon(":/icon/icon/top.yzzi.tomato.svg"));  //设置Logo
      a.setProductName("一只番茄");
