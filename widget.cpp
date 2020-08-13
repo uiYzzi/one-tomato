@@ -7,7 +7,6 @@
 #include <sstream>
 #include <QString>
 #include <DApplication>
-#include <QDir>
 using namespace std;
 QTimer *timer = new QTimer();
 int a;
@@ -30,6 +29,7 @@ Widget::Widget(DBlurEffectWidget *parent) :
     ui->titlebar->setBackgroundTransparent(true);//设置标题栏透明
     ui->titlebar->setIcon(QIcon::fromTheme(":/icon/icon/top.yzzi.tomato.svg"));
     ui->titlebar->setTitle("");
+    setMaskAlpha(190);
     ui->titlebar->setMenu(m_menu);
     ms = 1500;//设置初始时间
 
@@ -48,7 +48,6 @@ Widget::Widget(DBlurEffectWidget *parent) :
     timesGroup->addAction(m_25);
     timesGroup->addAction(m_35);
     timesGroup->addAction(m_45);
-
 
     m_5->setCheckable(true);
     m_15->setCheckable(true);
