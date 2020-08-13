@@ -3,6 +3,9 @@
 
 #include <dswitchbutton.h>
 #include <QWidget>
+#include <QTimer>
+#include <QMediaPlayer>
+
 DWIDGET_USE_NAMESPACE
 
 namespace Ui {
@@ -16,9 +19,14 @@ class Widget : public QWidget
 public:
     explicit Widget(QWidget *parent = 0);
     ~Widget();
+    QMediaPlayer *player;
+    QMediaPlaylist *playlist;
+
+
 
 private slots:
     void onSBtnSwitchButtonCheckedChanged(bool);
+    void refresh();
 
 
 private:

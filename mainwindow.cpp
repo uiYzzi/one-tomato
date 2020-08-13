@@ -1,5 +1,4 @@
 #include "mainwindow.h"
-
 #include <DMainWindow>
 
 DWIDGET_USE_NAMESPACE
