@@ -37,12 +37,10 @@ private:
     QTimer *timer = new QTimer();
     int a;
     bool timerswitch;
-    bool topswitch;
     int ms;
     DTitlebar *titlebar;
     QMenu *m_menu;
     QActionGroup *timesGroup;
-    QAction *m_top;
     QAction *m_5;
     QAction *m_15;
     QAction *m_25;

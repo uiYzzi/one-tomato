@@ -7,13 +7,13 @@
 #include <sstream>
 #include <QString>
 #include <DApplication>
+#include <QDebug>
 
 using namespace std;
 QTimer *timer = new QTimer();
 Widget::Widget(DBlurEffectWidget *parent) :
     DBlurEffectWidget(parent),
     m_menu(new QMenu),
-    m_top(new QAction("置顶")),
     m_5(new QAction("5分钟")),
     m_15(new QAction("15分钟")),
     m_25(new QAction("25分钟")),
@@ -31,9 +31,7 @@ Widget::Widget(DBlurEffectWidget *parent) :
     ui->titlebar->setTitle("");
     ui->titlebar->setMenu(m_menu);
     ms = 1500;//设置初始时间
-    topswitch=false;//默认不置顶
 
-    m_menu->addAction(m_top);//窗口置顶选项
     m_menu->addMenu(menu_times);//设置菜单
     menu_times->setTitle(tr("时间"));
     menu_times->addAction(m_5);
@@ -50,7 +48,6 @@ Widget::Widget(DBlurEffectWidget *parent) :
     timesGroup->addAction(m_35);
     timesGroup->addAction(m_45);
 
-    m_top->setCheckable(true);
     m_5->setCheckable(true);
     m_15->setCheckable(true);
     m_25->setCheckable(true);
@@ -65,23 +62,6 @@ Widget::Widget(DBlurEffectWidget *parent) :
     connect(m_25,&QAction::triggered,[=](){ms = 1500;});
     connect(m_35,&QAction::triggered,[=](){ms = 2100;});
     connect(m_45,&QAction::triggered,[=](){ms = 2700;});
-    connect(m_top,&QAction::triggered,[=]()
-    {
-
-        if(topswitch==false)
-        {
-            Qt::WindowFlags m_flags = windowFlags();
-            setWindowFlags(m_flags | Qt::WindowStaysOnTopHint);
-            show();
-            topswitch=true;
-        }else
-        {
-            Qt::WindowFlags m_flags = windowFlags();
-            m_flags = NULL;
-            setWindowFlags(m_flags);
-            show();
-        }
-    });
 
     switchbutton = new DSwitchButton (this);
     ui->horizontalLayout_2->addWidget(switchbutton);
