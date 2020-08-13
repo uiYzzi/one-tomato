@@ -5,10 +5,12 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += multimedia
+QT += multimediawidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = DtkDemo
+TARGET = one-tomato
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -24,10 +26,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
     widget.cpp
 
-HEADERS  += mainwindow.h \
+HEADERS  += \
     widget.h
 
 CONFIG += link_pkgconfig
@@ -38,4 +39,7 @@ CONFIG += c++11
 FORMS += \
     widget.ui
 
-RESOURCES +=
+RESOURCES += \
+    assets/assets.qrc
+
+

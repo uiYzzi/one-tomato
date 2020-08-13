@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/icon">
+        <file>icon/top.yzzi.tomato.svg</file>
+    </qresource>
+</RCC>
