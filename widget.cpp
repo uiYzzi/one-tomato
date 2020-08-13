@@ -31,7 +31,7 @@ Widget::Widget(DBlurEffectWidget *parent) :
     ui->titlebar->setTitle("");
     setMaskAlpha(190);
     ui->titlebar->setMenu(m_menu);
-    ms = 1500;//设置初始时间
+    ms = 1500+1;//设置初始时间
 
     m_menu->addMenu(menu_times);//设置菜单
     menu_times->setTitle(tr("时间"));
@@ -58,11 +58,11 @@ Widget::Widget(DBlurEffectWidget *parent) :
     m_25->setChecked(true);
 
     //设置按钮响应
-    connect(m_5,&QAction::triggered,[=](){ms = 301;timer->start(1000);refresh();});
-    connect(m_15,&QAction::triggered,[=](){ms = 901;timer->start(1000);refresh();});
-    connect(m_25,&QAction::triggered,[=](){ms = 1501;timer->start(1000);refresh();});
-    connect(m_35,&QAction::triggered,[=](){ms = 2101;timer->start(1000);refresh();});
-    connect(m_45,&QAction::triggered,[=](){ms = 2701;timer->start(1000);refresh();});
+    connect(m_5,&QAction::triggered,[=](){ms = 300+1;timer->start(1000);refresh();});
+    connect(m_15,&QAction::triggered,[=](){ms = 900+1;timer->start(1000);refresh();});
+    connect(m_25,&QAction::triggered,[=](){ms = 1500+1;timer->start(1000);refresh();});
+    connect(m_35,&QAction::triggered,[=](){ms = 2100+1;timer->start(1000);refresh();});
+    connect(m_45,&QAction::triggered,[=](){ms = 2700+1;timer->start(1000);refresh();});
 
 
     switchbutton = new DSwitchButton (this);
