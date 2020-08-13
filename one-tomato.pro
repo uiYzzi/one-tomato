@@ -26,10 +26,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
     widget.cpp
 
-HEADERS  += mainwindow.h \
+HEADERS  += \
     widget.h
 
 CONFIG += link_pkgconfig
@@ -40,5 +39,7 @@ CONFIG += c++11
 FORMS += \
     widget.ui
 
-RESOURCES +=
+RESOURCES += \
+    assets/assets.qrc
+
 
