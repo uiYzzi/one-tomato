@@ -2,4 +2,7 @@
     <qresource prefix="/icon">
         <file>icon/top.yzzi.tomato.svg</file>
     </qresource>
+    <qresource prefix="/">
+        <file>audio/ding.wav</file>
+    </qresource>
 </RCC>

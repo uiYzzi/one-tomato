@@ -7,10 +7,11 @@
 #include <sstream>
 #include <QString>
 #include <DApplication>
-#include <QDebug>
-
 using namespace std;
 QTimer *timer = new QTimer();
+int a;
+bool timerswitch;
+int ms;
 Widget::Widget(DBlurEffectWidget *parent) :
     DBlurEffectWidget(parent),
     m_menu(new QMenu),
@@ -26,9 +27,9 @@ Widget::Widget(DBlurEffectWidget *parent) :
     ui->setupUi(this);
     ui->titlebar->setFixedHeight(50);//初始化标题栏
     ui->titlebar->setBackgroundTransparent(true);//设置标题栏透明
-    setMaskAlpha(190);
     ui->titlebar->setIcon(QIcon::fromTheme(":/icon/icon/top.yzzi.tomato.svg"));
     ui->titlebar->setTitle("");
+    setMaskAlpha(190);
     ui->titlebar->setMenu(m_menu);
     ms = 1500;//设置初始时间
 
@@ -57,11 +58,12 @@ Widget::Widget(DBlurEffectWidget *parent) :
     m_25->setChecked(true);
 
     //设置按钮响应
-    connect(m_5,&QAction::triggered,[=](){ms = 300;});
-    connect(m_15,&QAction::triggered,[=](){ms = 900;});
-    connect(m_25,&QAction::triggered,[=](){ms = 1500;});
-    connect(m_35,&QAction::triggered,[=](){ms = 2100;});
-    connect(m_45,&QAction::triggered,[=](){ms = 2700;});
+    connect(m_5,&QAction::triggered,[=](){ms = 301;timer->start(1000);refresh();});
+    connect(m_15,&QAction::triggered,[=](){ms = 901;timer->start(1000);refresh();});
+    connect(m_25,&QAction::triggered,[=](){ms = 1501;timer->start(1000);refresh();});
+    connect(m_35,&QAction::triggered,[=](){ms = 2101;timer->start(1000);refresh();});
+    connect(m_45,&QAction::triggered,[=](){ms = 2701;timer->start(1000);refresh();});
+
 
     switchbutton = new DSwitchButton (this);
     ui->horizontalLayout_2->addWidget(switchbutton);
@@ -77,22 +79,24 @@ Widget::Widget(DBlurEffectWidget *parent) :
 
 
     //音频播放
-    /*player = new QMediaPlayer;
+    player = new QMediaPlayer;
     player->setVolume(100);
-    playlist = new QMediaPlaylist;
-    playlist->addMedia(QUrl::fromLocalFile(":/new/prefix1/rain.mp3"));
-    playlist->setPlaybackMode(QMediaPlaylist::CurrentItemInLoop);
-    player->setPlaylist(playlist);*/
+    player->setMedia(QUrl("qrc:/audio/ding.wav"));
 }
 void Widget::refresh()
 {
     ostringstream timeshow;
     if(timerswitch==true)
     {
+        ms=ms-1;
         QDateTime tomato_time = QDateTime::fromTime_t(ms);
         QString textout=tomato_time.toString("mm:ss");
-        ms=ms-1;
         ui->time->setText(textout);
+        if(ms==0)
+        {
+            player->play();
+            timer->stop();
+        }
     }else {
         QDateTime current_time = QDateTime::currentDateTime();
         QString str=current_time.toString("hh:mm");
@@ -116,13 +120,16 @@ void Widget::onSBtnSwitchButtonCheckedChanged(bool ck)
     if(ck==true)
     {
         timerswitch=true;
+        timer->start(1000);
         /*Widget::player->play();*/
     }
     else
     {
         timerswitch=false;
+        timer->start(1000);
         /*Widget::player->stop();*/
     }
+    refresh();
 
 }
 
