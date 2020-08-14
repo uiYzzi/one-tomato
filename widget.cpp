@@ -25,13 +25,13 @@ Widget::Widget(DBlurEffectWidget *parent) :
     ui(new Ui::Widget)
 {
     ui->setupUi(this);
+    ui->gridLayout->setContentsMargins(0, 0, 0, 0);
     ui->titlebar->setFixedHeight(50);//初始化标题栏
     ui->titlebar->setBackgroundTransparent(true);//设置标题栏透明
     ui->titlebar->setIcon(QIcon::fromTheme(":/icon/icon/top.yzzi.tomato.svg"));
     ui->titlebar->setTitle("");
     setMaskAlpha(190);
     ui->titlebar->setMenu(m_menu);
-
     m_menu->addMenu(menu_times);//设置菜单
     menu_times->setTitle(tr("时间"));
     menu_times->addAction(m_5);
@@ -40,7 +40,6 @@ Widget::Widget(DBlurEffectWidget *parent) :
     menu_times->addAction(m_35);
     menu_times->addAction(m_45);
     menu_times->addAction(m_set);
-
 
     timesGroup = new QActionGroup(this);//设置按钮互斥
     timesGroup->addAction(m_5);
@@ -124,6 +123,38 @@ Widget::~Widget()
     delete ui;
     qDebug()<<"exit";
     DApplication::quit();
+    delete player;
+    delete timer;
+}
+void Widget::input()
+{
+    bool isOK;
+    int i = DInputDialog::getInt(this, "输入时间",
+                                        "请输入时间（分钟）",
+                                        mem/60,0,100,1,&isOK);
+    if(isOK)
+    {
+        ms=mem=60*i+1;
+    }
+    switch (mem) {
+        case 300+1:
+            m_5->setChecked(true);
+            break;
+        case 900+1:
+            m_15->setChecked(true);
+            break;
+        case 1500+1:
+            m_25->setChecked(true);
+            break;
+        case 2100+1:
+            m_35->setChecked(true);
+            break;
+        case 2700+1:
+            m_45->setChecked(true);
+            break;
+    }
+    timer->start(1000);
+    refresh();
 }
 void Widget::input()//输入时间
 {
