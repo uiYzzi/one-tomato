@@ -32,6 +32,7 @@ private slots:
     void input();
 
 
+
 private:
     Ui::Widget *ui;
     DSwitchButton * switchbutton;
@@ -43,6 +44,7 @@ private:
     DTitlebar *titlebar;
     QMenu *m_menu;
     QActionGroup *timesGroup;
+    QAction *m_full;
     QAction *m_5;
     QAction *m_15;
     QAction *m_25;
@@ -54,5 +56,4 @@ private:
     QMenu *menu_times=new QMenu;
 
 };
-
 #endif // WIDGET_H

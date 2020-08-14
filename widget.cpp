@@ -9,10 +9,13 @@
 #include <DApplication>
 #include <QDialog>
 #include <DInputDialog>
+
+
 using namespace std;
 QTimer *timer = new QTimer();
 int a;
 bool timerswitch;
+
 Widget::Widget(DBlurEffectWidget *parent) :
     DBlurEffectWidget(parent),
     m_menu(new QMenu),
@@ -27,6 +30,7 @@ Widget::Widget(DBlurEffectWidget *parent) :
     ui(new Ui::Widget)
 {
     ui->setupUi(this);
+    ui->gridLayout->setContentsMargins(0, 0, 0, 0);
     ui->titlebar->setFixedHeight(50);//初始化标题栏
     ui->titlebar->setBackgroundTransparent(true);//设置标题栏透明
     ui->titlebar->setIcon(QIcon::fromTheme(":/icon/icon/top.yzzi.tomato.svg"));
@@ -34,7 +38,6 @@ Widget::Widget(DBlurEffectWidget *parent) :
     setMaskAlpha(190);
     ui->titlebar->setMenu(m_menu);
     mem=ms = 1500+1;//设置初始时间
-
     m_menu->addMenu(menu_times);//设置菜单
     menu_times->setTitle(tr("时间"));
     menu_times->addAction(m_5);
@@ -43,7 +46,6 @@ Widget::Widget(DBlurEffectWidget *parent) :
     menu_times->addAction(m_35);
     menu_times->addAction(m_45);
     menu_times->addAction(m_set);
-
 
     timesGroup = new QActionGroup(this);//设置按钮互斥
     timesGroup->addAction(m_5);
@@ -69,14 +71,11 @@ Widget::Widget(DBlurEffectWidget *parent) :
     connect(m_45,&QAction::triggered,[=](){mem=ms = 2700+1;timer->start(1000);refresh();});
     connect(m_set,&QAction::triggered,[=](){input();});
 
-
-    switchbutton = new DSwitchButton (this);
-    ui->horizontalLayout_2->addWidget(switchbutton);
-    switchbutton->setChecked(false);
+    ui->switchbutton->setChecked(false);
     timerswitch=false;
     setWindowFlags(windowFlags()&~Qt::WindowMaximizeButtonHint);// 禁止最大化按钮
     setFixedSize(this->width(),this->height());// 禁止拖动窗口大小
-    connect(switchbutton, SIGNAL(checkedChanged(bool)), this, SLOT(onSBtnSwitchButtonCheckedChanged(bool)));
+    connect(ui->switchbutton, SIGNAL(checkedChanged(bool)), this, SLOT(onSBtnSwitchButtonCheckedChanged(bool)));
     //时间更新
     timer->start(1000); //每隔1000ms发送timeout的信号
     connect(timer, SIGNAL(timeout()), this,SLOT(refresh()));
@@ -88,6 +87,7 @@ Widget::Widget(DBlurEffectWidget *parent) :
     player->setVolume(100);
     player->setMedia(QUrl("qrc:/audio/ding.wav"));
 }
+
 void Widget::refresh()
 {
     ostringstream timeshow;
@@ -103,11 +103,10 @@ void Widget::refresh()
             player->play();
             timer->stop();
         }
-    }else {
+    }
         QDateTime current_time = QDateTime::currentDateTime();
         QString str=current_time.toString("hh:mm");
-        ui->time->setText(str);
-    }
+        ui->titlebar->setTitle(str);
 }
 DTitlebar* Widget::getTitlebar()
 {
@@ -151,6 +150,7 @@ void Widget::input()
     timer->start(1000);
     refresh();
 }
+
 void Widget::onSBtnSwitchButtonCheckedChanged(bool ck)
 {
 
