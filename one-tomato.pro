@@ -26,10 +26,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-    widget.cpp
+    widget.cpp \
+    countdown.cpp \
+    toptime.cpp
 
 HEADERS  += \
-    widget.h
+    widget.h \
+    countdown.h \
+    toptime.h
 
 CONFIG += link_pkgconfig
 PKGCONFIG += dtkwidget

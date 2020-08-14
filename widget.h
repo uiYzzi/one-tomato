@@ -7,7 +7,8 @@
 #include <QMediaPlayer>
 #include <DBlurEffectWidget>
 #include <DTitlebar>
-
+#include "countdown.h"
+#include "toptime.h"
 DWIDGET_USE_NAMESPACE
 
 namespace Ui {
@@ -24,20 +25,22 @@ public:
     QMediaPlayer *player;
     QMediaPlaylist *playlist;
     DTitlebar* getTitlebar();
+    bool btSwitch;
 
 
 private slots:
     void onSBtnSwitchButtonCheckedChanged(bool);
     void refresh();
+    void refreshTime();
+    void refreshCount();
+    void input();
+
 
 
 private:
     Ui::Widget *ui;
     DSwitchButton * switchbutton;
     QTimer *timer = new QTimer();
-    int a;
-    bool timerswitch;
-    int ms;
     DTitlebar *titlebar;
     QMenu *m_menu;
     QActionGroup *timesGroup;
@@ -46,8 +49,9 @@ private:
     QAction *m_25;
     QAction *m_35;
     QAction *m_45;
-
-
+    QAction *m_set;
+    countDown *count;
+    topTime *toptime;
     QMenu *menu_times=new QMenu;
 
 };

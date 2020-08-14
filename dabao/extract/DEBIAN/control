@@ -1,0 +1,12 @@
+Package: top.yzzi.tomato
+Version: 1.0.4
+Architecture: amd64
+Maintainer: 一只科技菌
+Installed-Size: 56
+Depends: 
+Section: unknown
+Priority: extra
+Homepage: https://blog.yzzi.top
+Description: 
+ 可爱的番茄钟
+ 主页: https://blog.yzzi.top
