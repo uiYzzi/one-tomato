@@ -29,6 +29,7 @@ public:
 private slots:
     void onSBtnSwitchButtonCheckedChanged(bool);
     void refresh();
+    void input();
 
 
 private:
@@ -38,6 +39,7 @@ private:
     int a;
     bool timerswitch;
     int ms;
+    int mem;
     DTitlebar *titlebar;
     QMenu *m_menu;
     QActionGroup *timesGroup;
@@ -46,6 +48,7 @@ private:
     QAction *m_25;
     QAction *m_35;
     QAction *m_45;
+    QAction *m_set;
 
 
     QMenu *menu_times=new QMenu;
