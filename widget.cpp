@@ -126,7 +126,7 @@ void Widget::input()
     bool isOK;
     int i = DInputDialog::getInt(this, "输入时间",
                                         "请输入时间（分钟）",
-                                        mem,0,100,1,&isOK);
+                                        mem/60,0,100,1,&isOK);
     if(isOK)
     {
         ms=mem=60*i+1;
